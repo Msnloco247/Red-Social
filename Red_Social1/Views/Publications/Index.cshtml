@@ -1,0 +1,71 @@
+﻿@using Red_Social1.Infrastructure.Identity.ViewModels.Publication;
+@using Red_Social1.Infrastructure.Identity.ViewModels.Comentary;
+
+@model ComentaryPublicationViewModel;
+@{
+}
+
+<div>
+    <a class="btn btn-outline-success" asp-controller="Publications" asp-action="Save"> Crea una nueva publicacion</a>
+    @if (Model == null || Model.publications.Count == 0)
+    {
+        <h2>No hay Publicaciones aun</h2>
+    } else
+    {
+        @foreach (PublicationUserViewModel item in Model.publications)
+        {
+            
+            <div class="p-5 my-5 bg-light text-center  rounded-3">
+            <div class="float-start ">
+                <img class="rounded-circle " width="50" src="@item.PhotoUrl"/>
+                <p class="text-sm-start fw-bold">@item.UserName</p>
+            </div>
+                <div class="float-end btn-group">
+                    <button  class="btn btn-sm btn-outline-warning ">Editar</button>
+                    <a asp-controller="Publications" asp-route-id="@item.Id" asp-action="Delete" class="btn btn-sm btn-outline-danger">Eliminar</a>
+                </div>
+            <div class="mt-5">
+                <p class="lead">
+                    @item.Content
+                </p>
+            </div>
+            <div class="mt-5 text-start">
+                <p class="fw-bold  ml-5">
+                    Comentarios
+                </p>
+                <ul>
+                    <li>
+                            <p class="fw-bold ml-5">
+                                User Name.
+                            </p>
+                            <p class="lead">
+                                This is a simple Bootstrap jumbotron that sits within a <code>.container</code>, recreated with built-in utility classes.
+                            </p>
+                            
+                            <form asp-controller="Comentary" asp-action="Save" method="post" >
+                                <div class="float-start ">
+                                    <img class="rounded-circle " width="50" src="" />
+                                    <p class="text-sm-start fw-bold"></p>
+                                </div>
+                                <label class="form-label fw-bold ml-5">
+                                    Hacer nuevo comentario.
+                                </label>
+                                <textarea minlength="8" asp-for="@Model.comentary.Content" placeholder="Comparte tus ideas" class="form-control" style="resize:none; overflow:hidden" required></textarea>
+                                <span asp-validation-for="@Model.comentary.Content" class="text-danger"></span>
+                        
+                                <input type="hidden" value="@item.Id" asp-for="@Model.comentary.PublicationId" />
+                                <button type="submit" class="btn btn-outline-primary btn-sm mt-2 float-end">Enviar</button>
+
+                            </form>
+                    </li>
+                </ul>
+                
+            </div>
+        </div>
+
+        }
+        
+    }
+
+
+</div>    

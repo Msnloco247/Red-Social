@@ -1,0 +1,22 @@
+﻿@using Red_Social1.Infrastructure.Identity.ViewModels.Publication;
+
+@model SavePublicationUserViewModel;
+<div>
+    <div class="p-5 my-5 bg-light text-center  rounded-3">
+        <div class="mt-5">
+            <p class="lead">
+                Crea una nueva publicacion
+            </p>
+        </div>
+
+        <form asp-controller="Publications" method="post" asp-action="Save">
+            <div class="mt-5 text-start mb-4">
+                <textarea minlength="5" asp-for="Content" class="form-control" style="resize:none; overflow:hidden" required placeholder="Cuenta tus ideas nuevas aqui"></textarea>
+                <span asp-validation-for="Content" class="text-danger"></span>
+            </div>
+            <button type="submit" class="btn btn-outline-primary float-end mb-2 btn-sm">Enviar</button>
+        </form>
+
+    </div>
+
+</div>    
